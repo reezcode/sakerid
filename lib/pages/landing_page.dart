@@ -15,10 +15,10 @@ class _LandingPageState extends State<LandingPage> {
   bool isHover3 = false;
 
   bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 600;
+      MediaQuery.of(context).size.width >= 1200;
 
   bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 600;
+      MediaQuery.of(context).size.width < 1200;
 
   @override
   Widget build(BuildContext context) {
@@ -245,9 +245,11 @@ class _LandingPageState extends State<LandingPage> {
                               ],
                             ),
                             Spacer(),
-                            buttonOutline('Masuk'),
-                          if(isMobile(context))
-                            buttonOutline('Menu'),
+                            buttonOutline(
+                                (isDesktop(context))
+                                    ? 'Masuk'
+                                    : 'Menu'
+                            ),
                         ],
                       ),
                     ),
@@ -339,53 +341,64 @@ class _LandingPageState extends State<LandingPage> {
                                   'Temukan tujuan perjalananmu melalui Saker.id',
                                   style: subTitleText,
                                 ),
-                                SizedBox(
-                                  height: 36,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                isDesktop(context)
+                                    ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    formStart(
-                                        title: 'Lokasi Wisata',
-                                        description: 'Temukan lokasi yang ingin dikunjungi',
-                                        icon: Icons.near_me_outlined
-                                    ),
-                                    formStart(
-                                        title: 'Tanggal',
-                                        description: 'Tentukan tanggal  kapan kamu pergi',
-                                        icon: Icons.calendar_month_outlined
-                                    ),
-                                    formStart(
-                                        title: 'Jumlah Orang',
-                                        description: 'Berapa banyak orang yang akan ikut?',
-                                        icon: Icons.group_outlined
-                                    ),
                                     SizedBox(
-                                      width: 5,
+                                      height: 36,
                                     ),
-                                    MouseRegion(
-                                      onHover: (s) {
-                                        setState((){
-                                          isHover3 = true;
-                                        });
-                                      },
-                                      onExit: (s) {
-                                        setState((){
-                                          isHover3 = false;
-                                        });
-                                      },
-                                      child: Image.asset(
-                                        (isHover3)
-                                            ? 'images/icon_searchHovered.png'
-                                            : 'images/icon_search.png',
-                                        width: 48,
-                                        height: 48,
-                                      ),
-                                    )
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        formStart(
+                                            title: 'Lokasi Wisata',
+                                            description: 'Temukan lokasi yang ingin dikunjungi',
+                                            icon: Icons.near_me_outlined
+                                        ),
+                                        formStart(
+                                            title: 'Tanggal',
+                                            description: 'Tentukan tanggal  kapan kamu pergi',
+                                            icon: Icons.calendar_month_outlined
+                                        ),
+                                        formStart(
+                                            title: 'Jumlah Orang',
+                                            description: 'Berapa banyak orang yang akan ikut?',
+                                            icon: Icons.group_outlined
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        MouseRegion(
+                                          onHover: (s) {
+                                            setState((){
+                                              isHover3 = true;
+                                            });
+                                          },
+                                          onExit: (s) {
+                                            setState((){
+                                              isHover3 = false;
+                                            });
+                                          },
+                                          child: Image.asset(
+                                            (isHover3)
+                                                ? 'images/icon_searchHovered.png'
+                                                : 'images/icon_search.png',
+                                            width: 48,
+                                            height: 48,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ],
-                                ),
+                                )
+                                    : Column(
+                                  children: [
+                                    Text('Ini Mobile')
+                                  ],
+                                )
                               ],
-                            ),
+                            )
                           )
                         )
                       ]
