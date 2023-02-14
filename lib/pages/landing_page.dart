@@ -14,6 +14,12 @@ class _LandingPageState extends State<LandingPage> {
   bool isHover2 = false;
   bool isHover3 = false;
 
+  bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 600;
+
+  bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < 600;
+
   @override
   Widget build(BuildContext context) {
 
@@ -201,44 +207,47 @@ class _LandingPageState extends State<LandingPage> {
                               color: Color(0xffF3F3F3),
                             ),
                           ),
-                          Row(
-                            children: [
-                              navItem(
-                                title: 'Beranda',
-                                index: 0,
-                              ),
-                              SizedBox(
-                                width: 40,
-                              ),
-                              navItem(
-                                title: 'Wisata',
-                                index: 1,
-                              ),
-                              SizedBox(
-                                width: 40,
-                              ),
-                              navItem(
-                                title: 'Sejarah',
-                                index: 2,
-                              ),
-                              SizedBox(
-                                width: 40,
-                              ),
-                              navItem(
-                                title: 'Budaya',
-                                index: 3,
-                              ),
-                              SizedBox(
-                                width: 40,
-                              ),
-                              navItem(
-                                title: 'Kontak',
-                                index: 4,
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          buttonOutline('Masuk'),
+                          if(isDesktop(context))
+                            Row(
+                              children: [
+                                navItem(
+                                  title: 'Beranda',
+                                  index: 0,
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                navItem(
+                                  title: 'Wisata',
+                                  index: 1,
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                navItem(
+                                  title: 'Sejarah',
+                                  index: 2,
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                navItem(
+                                  title: 'Budaya',
+                                  index: 3,
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                navItem(
+                                  title: 'Kontak',
+                                  index: 4,
+                                ),
+                              ],
+                            ),
+                            Spacer(),
+                            buttonOutline('Masuk'),
+                          if(isMobile(context))
+                            buttonOutline('Menu'),
                         ],
                       ),
                     ),
